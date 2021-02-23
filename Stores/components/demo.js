@@ -5,7 +5,8 @@ import { StyleSheet, Text, View, Image, Button, Alert, Linking } from 'react-nat
 import GetLocation from 'react-native-get-location'
 import Card from './cards'
 export default function App() {
-    const [location, setLocation] = useState(null);
+    const [locationlat, setLocationlat] = useState(null);
+    const [locationlong, setLocationlong] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
 
     useEffect(() => {
@@ -14,7 +15,8 @@ export default function App() {
             timeout: 15000,
         })
             .then(location => {
-                setLocation(location);
+                setLocationlat(location.latitude),
+                    setLocationlong(location.longitude)
             })
             .catch(error => {
                 setErrorMsg(error)
@@ -43,7 +45,7 @@ export default function App() {
                     source={{ uri: 'https://etimg.etb2bimg.com/photo/76159933.cms' }}></Image>
                 <Text >SRM Store</Text>
                 <Text>Address: Mahatma Gandhi Rd, Potheri, SRM Nagar, Kattankulathur, Tamil Nadu 603203</Text>
-                <Button onPress={() => { return Linking.openURL(`https://www.google.com/maps/dir/?api=1&origin=${location}&destination=12.8231° N, 80.0442° E`); }} title="Direction"></Button>
+                <Button onPress={() => { return Linking.openURL(`https://www.google.com/maps/dir/?api=1&origin=${locationlat}°,${locationlong}°&destination=12.8231° N, 80.0442° E`); }} title="Direction"></Button>
             </Card>
             <Card>
 
@@ -52,7 +54,7 @@ export default function App() {
                     source={{ uri: 'https://i.ytimg.com/vi/K_JAB-V_kIM/maxresdefault.jpg' }}></Image>
                 <Text >Lake MAll</Text>
                 <Text>Address: 104, Rash Behari Ave, Lake Market, Kalighat, Kolkata, West Bengal 700029</Text>
-                <Button onPress={() => { return Linking.openURL(`https://www.google.com/maps/dir/?api=1&origin=${location}&destination=22.5153° N, 88.3932° E`); }} title="Direction"></Button>
+                <Button onPress={() => { return Linking.openURL(`https://www.google.com/maps/dir/?api=1&origin=${locationlat},${locationlong}&destination=22.5153° N, 88.3932° E`); }} title="Direction"></Button>
             </Card>
             <Card>
                 <Image
@@ -60,7 +62,7 @@ export default function App() {
                     source={{ uri: 'https://previews.123rf.com/images/rickdeacon/rickdeacon1607/rickdeacon160700269/60279822-shot-of-a-lindt-chocolate-store-at-an-airport.jpg' }}></Image>
                 <Text >Chocolate Store</Text>
                 <Text>Address: 1858/1, Rajdanga Main Road, 3rd Floor, Acropolis Mall, Kolkata, West Bengal 700107</Text>
-                <Button onPress={() => { return Linking.openURL(`https://www.google.com/maps/dir/?api=1&origin=${location}&destination=chocolate+store+chennai`); }} title="Direction"></Button>
+                <Button onPress={() => { return Linking.openURL(`https://www.google.com/maps/dir/?api=1&origin=Acropolis+Kasba+kolkata&destination=chocolate+store+chennai`); }} title="Direction"></Button>
             </Card>
         </View>
     );
