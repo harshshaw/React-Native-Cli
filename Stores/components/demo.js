@@ -1,10 +1,10 @@
 
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, SafeAreaView, Image, Button, Linking, ScrollView } from 'react-native';
-import { openMap, createMapLink } from 'react-native-open-maps'
+import openMap from 'react-native-open-map'
 import GetLocation from 'react-native-get-location'
 import Card from './cards'
-export default function App() {
+const Apps = () => {
     const [locationlat, setLocationlat] = useState(null);
     const [locationlong, setLocationlong] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
@@ -46,7 +46,16 @@ export default function App() {
                         source={{ uri: 'https://etimg.etb2bimg.com/photo/76159933.cms' }}></Image>
                     <Text style={styles.cardtext} >SRM Store</Text>
                     <Text style={styles.cardAddress}>Address: Mahatma Gandhi Rd, Potheri, SRM Nagar, Kattankulathur, Tamil Nadu 603203</Text>
-                    <Button onPress={() => { return Linking.openURL(`https://www.google.com/maps/dir/?api=1&origin=${locationlat},${locationlong}&destination=22.5153° N, 88.3932° E`); }} title="Direction"></Button>
+                    <Button onPress={() => {
+                        openMap.show({
+                            latitude: 40.778721,
+                            longitude: -73.968188,
+                            title: 'Central Park',
+                            cancelText: 'Close',
+                            actionSheetTitle: 'Chose app',
+                            actionSheetMessage: 'Available applications '
+                        })
+                    }} title="Direction"></Button>
                 </Card>
                 <Card>
 
@@ -95,3 +104,5 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     }
 });
+
+export default Apps;
