@@ -1,13 +1,14 @@
 
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, SafeAreaView, Image, Button, Linking, ScrollView } from 'react-native';
-import openMap from 'react-native-open-map'
+import { StyleSheet, Text, SafeAreaView, Image, Button, Linking, ScrollView, TouchableOpacity } from 'react-native';
+import openMap, { createMapLink } from 'react-native-open-maps'
 import GetLocation from 'react-native-get-location'
 import Card from './cards'
 const Apps = () => {
     const [locationlat, setLocationlat] = useState(null);
     const [locationlong, setLocationlong] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
+
 
     useEffect(() => {
         GetLocation.getCurrentPosition({
@@ -47,14 +48,12 @@ const Apps = () => {
                     <Text style={styles.cardtext} >SRM Store</Text>
                     <Text style={styles.cardAddress}>Address: Mahatma Gandhi Rd, Potheri, SRM Nagar, Kattankulathur, Tamil Nadu 603203</Text>
                     <Button onPress={() => {
-                        openMap.show({
-                            latitude: 40.778721,
-                            longitude: -73.968188,
-                            title: 'Central Park',
-                            cancelText: 'Close',
-                            actionSheetTitle: 'Chose app',
-                            actionSheetMessage: 'Available applications '
-                        })
+                        return openMap(
+                            {
+                                start: `${locationlat} ,${locationlong}`,
+                                end: "srm university chennai",
+                                travelType: 'drive'
+                            });
                     }} title="Direction"></Button>
                 </Card>
                 <Card>
@@ -64,7 +63,14 @@ const Apps = () => {
                         source={{ uri: 'https://i.ytimg.com/vi/K_JAB-V_kIM/maxresdefault.jpg' }}></Image>
                     <Text style={styles.cardtext} >Lake MAll</Text>
                     <Text style={styles.cardAddress}>Address: 104, Rash Behari Ave, Lake Market, Kalighat, Kolkata, West Bengal 700029</Text>
-                    <Button onPress={() => { return Linking.openURL(`https://www.google.com/maps/dir/?api=1&origin=${locationlat},${locationlong}&destination=22.5153° N, 88.3932° E`); }} title="Direction"></Button>
+                    <Button onPress={() => {
+                        return openMap(
+                            {
+                                start: `${locationlat} ,${locationlong}`,
+                                end: " 104, Rash Behari Ave, Lake Market, Kalighat, Kolkata, West Bengal 700029",
+                                travelType: 'drive'
+                            });
+                    }} title="Direction"></Button>
                 </Card>
                 <Card>
                     <Image
@@ -72,7 +78,14 @@ const Apps = () => {
                         source={{ uri: 'https://previews.123rf.com/images/rickdeacon/rickdeacon1607/rickdeacon160700269/60279822-shot-of-a-lindt-chocolate-store-at-an-airport.jpg' }}></Image>
                     <Text style={styles.cardtext}>Chocolate Store</Text>
                     <Text style={styles.cardAddress}>Address: 1858/1, Rajdanga Main Road, 3rd Floor, Acropolis Mall, Kolkata, West Bengal 700107</Text>
-                    <Button onPress={() => { return Linking.openURL(`https://www.google.com/maps/dir/?api=1&origin=Acropolis+Kasba+kolkata&destination=chocolate+store+chennai`); }} title="Direction"></Button>
+                    <Button onPress={() => {
+                        return openMap(
+                            {
+                                start: `${locationlat} ,${locationlong}`,
+                                end: "1858/1, Rajdanga Main Road, 3rd Floor, Acropolis Mall, Kolkata, West Bengal 700107",
+                                travelType: 'drive'
+                            });
+                    }} title="Direction"></Button>
                 </Card>
             </ScrollView>
         </SafeAreaView>
