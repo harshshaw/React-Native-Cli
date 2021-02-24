@@ -23,10 +23,12 @@ const styles = StyleSheet.create({
         marginHorizontal: 4,
         marginVertical: 6,
         width: 300,
-        height: 230
+        height: 250,
+        backgroundColor: '#f0f5f5'
     },
     cardContent: {
         marginHorizontal: 18,
         marginVertical: 20,
+
     }
 });

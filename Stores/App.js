@@ -11,7 +11,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 function Homescreen({ navigation }) {
   return (
     <View style={styles.container}>
-      <Text>Lets Explores !</Text>
+      <Text style={styles.text}>Lets Explores !</Text>
       <Button title="Go to startup"
         onPress={() => navigation.navigate('Nature')}></Button>
     </View>
@@ -37,5 +37,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#46466d'
   },
+  text: {
+    color: 'white'
+  }
 });
